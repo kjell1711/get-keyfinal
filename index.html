@@ -15,95 +15,143 @@
         body {
             background-color: #000;
             color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            text-align: center;
             overflow-x: hidden;
         }
         
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            animation: fadeIn 1s ease-out;
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
         }
         
-        .header {
-            margin-bottom: 4rem;
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1.2s ease-out;
         }
         
         h1 {
-            font-size: 5rem;
-            margin-bottom: 1rem;
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             background: linear-gradient(90deg, #fff, #aaa);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-            animation: pulse 2s infinite alternate;
         }
         
         .subtitle {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 300;
         }
         
         .cta-button {
             background: #fff;
             color: #000;
             border: none;
-            padding: 1.2rem 3rem;
-            border-radius: 12px;
-            font-size: 1.3rem;
+            padding: 1.5rem 4rem;
+            border-radius: 15px;
+            font-size: 1.5rem;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 2rem;
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
         }
         
         .cta-button:hover {
             background: #e0e0e0;
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.3);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border-right: 3px solid #fff;
+            border-bottom: 3px solid #fff;
+            transform: rotate(45deg);
+        }
+        
+        .content-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 700;
         }
         
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 4rem 0;
+            max-width: 1200px;
+            width: 100%;
         }
         
         .feature-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 16px;
+            padding: 3rem 2rem;
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(255, 255, 255, 0.1);
         }
         
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
         }
         
         .feature-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             font-weight: 700;
         }
@@ -111,77 +159,101 @@
         .feature-description {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
+            font-size: 1.1rem;
         }
         
         .links {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
         }
         
         .link-card {
             background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
+            padding: 2.5rem;
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .link-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .link-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.1);
         }
         
         .link-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
             font-weight: 600;
         }
         
         .link-content {
             background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 8px;
+            padding: 1.2rem;
+            border-radius: 12px;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            font-size: 1rem;
             word-break: break-all;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .copy-btn {
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
         }
         
         .copy-btn:hover {
             background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
         
         .instructions {
             background: rgba(255, 255, 255, 0.05);
-            padding: 3rem;
-            border-radius: 16px;
-            margin: 3rem 0;
-            text-align: left;
-            max-width: 800px;
+            padding: 4rem;
+            border-radius: 25px;
+            max-width: 900px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .instructions.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .instructions h2 {
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-size: 3rem;
+            font-weight: 700;
         }
         
         .step {
-            margin-bottom: 1.5rem;
-            padding-left: 2rem;
+            margin-bottom: 2rem;
+            padding-left: 3rem;
             position: relative;
+            font-size: 1.2rem;
         }
         
         .step:before {
@@ -192,13 +264,14 @@
             top: 0;
             background: #fff;
             color: #000;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 1.2rem;
         }
         
         .particles {
@@ -220,14 +293,27 @@
             animation: float 15s infinite linear;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        @keyframes pulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
         }
         
         @keyframes float {
@@ -241,43 +327,64 @@
         
         @media (max-width: 768px) {
             h1 {
-                font-size: 3rem;
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
             }
             
             .features, .links {
                 grid-template-columns: 1fr;
             }
+            
+            .instructions {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+    <div class="hero">
+        <div class="hero-content">
             <h1>VANISH X</h1>
             <p class="subtitle">The Ultimate Roblox Invisible Cheat!</p>
             <a href="key" class="cta-button">GET YOUR KEY NOW</a>
         </div>
-        
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+    
+    <section class="content-section" id="features">
+        <h2 class="section-title">Powerful Features</h2>
         <div class="features">
             <div class="feature-card">
                 <div class="feature-icon">👻</div>
                 <div class="feature-title">Complete Invisibility</div>
-                <div class="feature-description">Become completely invisible to other players while maintaining full functionality.</div>
+                <div class="feature-description">Become completely invisible to other players while maintaining full functionality and control.</div>
             </div>
             
             <div class="feature-card">
                 <div class="feature-icon">🏃‍♂️</div>
                 <div class="feature-title">Move While Invisible</div>
-                <div class="feature-description">Run, jump, and move freely while remaining completely hidden from other players.</div>
+                <div class="feature-description">Run, jump, and move freely while remaining completely hidden from other players' view.</div>
             </div>
             
             <div class="feature-card">
                 <div class="feature-icon">🎮</div>
                 <div class="feature-title">Beautiful GUI</div>
-                <div class="feature-description">Easy-to-use interface with toggle options and customization settings.</div>
+                <div class="feature-description">Easy-to-use interface with toggle options, customization settings, and smooth animations.</div>
             </div>
         </div>
+    </section>
 
+    <section class="content-section" id="links">
+        <h2 class="section-title">Important Links</h2>
         <div class="links">
             <div class="link-card">
                 <div class="link-title">📱 Join Our Discord</div>
@@ -291,19 +398,20 @@
                 <button class="copy-btn" onclick="copyToClipboard('loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kjell1711/Kjellcheats/refs/heads/main/Invisibility.lua\"))()')">Copy Script</button>
             </div>
         </div>
-        
+    </section>
+    
+    <section class="content-section" id="instructions">
         <div class="instructions">
             <h2>How to Use</h2>
             <div style="counter-reset: step;">
                 <div class="step">Get your free key from the key generator</div>
                 <div class="step">Execute the script in your Roblox executor</div>
                 <div class="step">Enter your key in the verification system</div>
-                <div class="step">Toggle invisibility and enjoy!</div>
+                <div class="step">Toggle invisibility and enjoy the power!</div>
             </div>
         </div>
-        
-        <a href="key" class="cta-button">GET STARTED - GET YOUR KEY</a>
-    </div>
+        <a href="key" class="cta-button" style="margin-top: 3rem;">GET YOUR KEY NOW</a>
+    </section>
     
     <div class="particles" id="particles"></div>
 
@@ -317,6 +425,45 @@
                 alert('Error copying. Please copy manually.');
             });
         }
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // If it's a features section, animate each card with delay
+                    if (entry.target.id === 'features') {
+                        const cards = entry.target.querySelectorAll('.feature-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                    
+                    // If it's a links section, animate each card with delay
+                    if (entry.target.id === 'links') {
+                        const cards = entry.target.querySelectorAll('.link-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
 
         // Partikel-Animation für Hintergrund
         function createParticles() {
