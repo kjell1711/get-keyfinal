@@ -226,7 +226,7 @@
         <h1>Get Your Key:</h1>
         
         <div class="key-container">
-            <div class="key-display" id="keyDisplay">AKT-7B9-2F4-C8D-3E1</div>
+            <div class="key-display" id="keyDisplay">Loading key...</div>
             <button class="copy-btn" id="copyBtn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
@@ -243,15 +243,31 @@
     <div class="particles" id="particles"></div>
 
     <script>
-        // Hier können Sie den Schlüssel täglich ändern
-        const aktuellerkey = "AKT-7B9-2F4-C8D-3E1";
-        
-        // Setze den Schlüssel im HTML
-        document.getElementById('keyDisplay').textContent = aktuellerkey;
-        
+        // Funktion zum Laden des Schlüssels aus der JSON-Datei
+        async function loadKey() {
+            try {
+                const response = await fetch('key.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                document.getElementById('keyDisplay').textContent = data.key;
+                return data.key;
+            } catch (error) {
+                console.error('Error loading key:', error);
+                document.getElementById('keyDisplay').textContent = 'Error loading key';
+                return null;
+            }
+        }
+
         // Kopierfunktion
-        document.getElementById('copyBtn').addEventListener('click', function() {
-            const keyText = aktuellerkey;
+        document.getElementById('copyBtn').addEventListener('click', async function() {
+            const keyText = document.getElementById('keyDisplay').textContent;
+            
+            if (keyText === 'Loading key...' || keyText === 'Error loading key') {
+                alert('Please wait for the key to load or check the connection.');
+                return;
+            }
             
             // Verwende die Clipboard API
             navigator.clipboard.writeText(keyText).then(() => {
@@ -298,8 +314,11 @@
             }
         }
         
-        // Partikel beim Laden erstellen
-        createParticles();
+        // Beim Laden der Seite: Partikel erstellen und Schlüssel laden
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            loadKey();
+        });
     </script>
 </body>
 </html>
